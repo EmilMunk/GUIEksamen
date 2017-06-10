@@ -13,13 +13,6 @@ namespace WebAPI.Models
         public string Energi { get; set; }
     }
 
-    public class KalorieIndtag
-    {
-        public int ID { get; set; }
-        public DateTime Day { get; set; }
-        public int Indtag { get; set; }
-    }
-
     public class Indtag
     {
         public int ID { get; set; }

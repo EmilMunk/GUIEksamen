@@ -15,7 +15,6 @@ namespace WebAPI.DAL
         }
 
         public DbSet<KalorieIndhold> Kalorier { get; set; }
-        public DbSet<KalorieIndtag> Indtag { get; set; }
 
         public DbSet<Indtag> IndtastIndtag { get; set; }
 

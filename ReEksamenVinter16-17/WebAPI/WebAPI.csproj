@@ -239,8 +239,6 @@
     <Compile Include="Controllers\IndtastIndtagController.cs" />
     <Compile Include="Controllers\KalorieIndholds1Controller.cs" />
     <Compile Include="Controllers\KalorieIndholdsController.cs" />
-    <Compile Include="Controllers\KalorieIndtagAPIController.cs" />
-    <Compile Include="Controllers\KalorieIndtagWebController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\KalorieIndholdDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -319,11 +317,6 @@
     <Content Include="Views\KalorieIndholds1\Details.cshtml" />
     <Content Include="Views\KalorieIndholds1\Edit.cshtml" />
     <Content Include="Views\KalorieIndholds1\Index.cshtml" />
-    <Content Include="Views\KalorieIndtagWeb\Create.cshtml" />
-    <Content Include="Views\KalorieIndtagWeb\Delete.cshtml" />
-    <Content Include="Views\KalorieIndtagWeb\Details.cshtml" />
-    <Content Include="Views\KalorieIndtagWeb\Edit.cshtml" />
-    <Content Include="Views\KalorieIndtagWeb\Index.cshtml" />
     <Content Include="Views\IndtastIndtag\Create.cshtml" />
     <Content Include="Views\IndtastIndtag\Delete.cshtml" />
     <Content Include="Views\IndtastIndtag\Details.cshtml" />
