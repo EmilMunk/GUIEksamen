@@ -237,9 +237,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndtastIndtagAPIController.cs" />
     <Compile Include="Controllers\IndtastIndtagController.cs" />
-    <Compile Include="Controllers\KalorieIndholds1Controller.cs" />
-    <Compile Include="Controllers\KalorieIndholdsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\MadvarerWebController.cs" />
+    <Compile Include="Controllers\MadVareAPIController.cs" />
+    <Compile Include="Controllers\Random.cs" />
     <Compile Include="DAL\KalorieIndholdDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

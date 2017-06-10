@@ -56,6 +56,14 @@ namespace ReEksamenVinter16_17
                 //foreach (var i in ToDisplay)
                 //    toDisplayList.Add(new ChartClass() {Date = i.Day, Count = i.Indtag});
 
+                string date = "09/06-2017";
+
+                AllData.Add(new ChartClass() {Count = 10000, Date = DateTime.Parse(date)});
+
+                AllData = (from a in AllData
+                           orderby a.Date, a.Date
+                        select a).ToList();
+
                 this.Chart.ItemsSource = AllData;
             }
  

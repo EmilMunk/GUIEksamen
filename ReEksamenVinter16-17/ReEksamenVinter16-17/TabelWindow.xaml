@@ -6,29 +6,54 @@
         xmlns:local="clr-namespace:ReEksamenVinter16_17"
         mc:Ignorable="d"
         Title="TabelWindow" Height="300" Width="600">
+    <Window.Resources>
+        <DataTemplate x:Key="FoodTemplate">
+            <WrapPanel>
+                <TextBlock Text="{Binding Path=MadVare}" Padding="5,0" Width="200"></TextBlock>
+                <TextBlock Text="{Binding Path=Energi}" Padding="5,0" Width="100"></TextBlock>
+            </WrapPanel>
+        </DataTemplate>
+    </Window.Resources>
+
     <Window.DataContext>
         <local:WPFFødevarer />
     </Window.DataContext>
+
     <DockPanel Margin="10">
         <Button DockPanel.Dock="Bottom" Content="Done" Click="Button_Click"></Button>
         <Grid DockPanel.Dock="Left" Width="150">
             <Grid.RowDefinitions>
-                <RowDefinition Height="115*"/>
-                <RowDefinition Height="114*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Add" FontSize="20" Command="{Binding AddCommand}">
-                </Button>
+            </Button>
             <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Delete" FontSize="20" Command="{Binding DeleteCommand}" ></Button>
 
         </Grid>
-        <ListView Name="lvUsers" ItemsSource="{Binding}" SelectedIndex="{Binding Path=CurrentIndex}" SelectedItem="{Binding Path=CurrentFødevare }">
-            <ListView.View>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="207*"/>
+                <ColumnDefinition Width="215*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="196*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,4,0,3" FontWeight="Bold" Height="26" Width="63">MadVare:</Label>
+            <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontWeight="Bold" Height="26" Margin="0,4,0,3">Kcal/100gram:</Label>
+            <ListBox Grid.Row="1" Grid.RowSpan="1" Name="lvUsers" ItemsSource="{Binding}" SelectedIndex="{Binding Path=CurrentIndex}" SelectedItem="{Binding Path=CurrentFødevare }" ItemTemplate="{StaticResource FoodTemplate}" Grid.ColumnSpan="2">
+
+
+                <!--<ListView.View>
                 <GridView>
                     <GridViewColumn Header="Fødevare" Width="auto" DisplayMemberBinding="{Binding Path=MadVare}" />
                     <GridViewColumn Header="Kcal / 100gram" Width="auto" DisplayMemberBinding="{Binding Path=Energi}" />
                 </GridView>
-            </ListView.View>
-        </ListView>
+            </ListView.View>-->
+            </ListBox>
+        </Grid>
+
 
     </DockPanel>
 

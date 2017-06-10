@@ -13,7 +13,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class KalorieIndholdsController : ApiController
+    public class MadVareAPIController : ApiController
     {
         private KalorieIndholdDbContext db = new KalorieIndholdDbContext();
 

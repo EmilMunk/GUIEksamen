@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace WebAPI.Controllers
 {
     [Authorize]
-    public class ValuesController : ApiController
+    public class Random : ApiController
     {
         // GET api/values
         public IEnumerable<string> Get()

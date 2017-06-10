@@ -17,8 +17,8 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <Label VerticalAlignment="Center" HorizontalAlignment="Center"> Fødevare:</Label>
-            <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Gram:</Label>
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"> Fødevare:</Label>
+            <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold">Gram:</Label>
             <ComboBox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=MadVare}" Name="Combo"  MinWidth="50">
                 
             </ComboBox>

@@ -7,18 +7,29 @@
         xmlns:chart="clr-namespace:Panteam;assembly=Panteam.MetroChart"
         xmlns:metroChart="clr-namespace:Panteam.MetroChart;assembly=Panteam.MetroChart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Diet Planner" Height="350" Width="525">
     <Grid>
-        <Button x:Name="Tabel" Content="Tabel" HorizontalAlignment="Left" Margin="115,252,0,0" VerticalAlignment="Top" Width="75" Click="Tabel_Click"/>
-        <Button x:Name="Indtag" Content="Indtag" HorizontalAlignment="Left" Margin="300,252,0,0" VerticalAlignment="Top" Width="75" Click="Indtag_OnClick"/>
-        <DatePicker Name="DatePicker" HorizontalAlignment="Left" Margin="109,197,0,0" VerticalAlignment="Top" CalendarClosed="DatePicker_OnCalendarClosed"/>
-        <TextBox IsReadOnly="True" x:Name="KalorieprDag" HorizontalAlignment="Left" Height="23" Margin="277,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label" Content="Kalorier" HorizontalAlignment="Left" Margin="424,198,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="ChartButton" Content="Chart" HorizontalAlignment="Left" Margin="300,122,0,0" VerticalAlignment="Top" Width="75" Click="ChartButton_OnClick"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="142*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Image Source="images/Font.jpg" Grid.ColumnSpan="3"></Image>
+        <Button Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"  x:Name="Tabel" Content="Tabel"  Margin="0,0,0,0"  Width="75" Click="Tabel_Click"/>
+        <Button x:Name="Indtag" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Indtag"  Margin="0,0,0,0" Width="75" Click="Indtag_OnClick" Grid.Row="2" Grid.Column="1"/>
+        <DatePicker Name="DatePicker" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0,0,0,0" CalendarClosed="DatePicker_OnCalendarClosed" Grid.Row="1" Grid.Column="0"/>
+        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" x:Name="KalorieprDag" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" Width="120" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="label" Content="Kalorier" HorizontalAlignment="Left" Margin="0,-5,0,0" Height="25" Grid.Row="1" Grid.Column="2"/>
+        <Button  x:Name="ChartButton" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Chart"  Margin="0,0,0,0"  Width="75" Click="ChartButton_OnClick" Grid.Column="2" Grid.Row="2"/>
 
 
 
 
     </Grid>
-    
+
 </Window>
