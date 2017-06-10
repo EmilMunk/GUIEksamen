@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -18,10 +19,38 @@ using Newtonsoft.Json;
 
 namespace ReEksamenVinter16_17
 {
+
+
+    public class AllData
+    {
+        public int ID { get; set; }
+        public DateTime Day { get; set; }
+        public string MadVare { get; set; }
+        public int Amount { get; set; }
+        public float Kalorier { get; set; }
+    }
+
+
+
+    public static class MyExtensions
+    {
+        public static IEnumerable EachDay(this DateTime start, DateTime end)
+        {
+            // Remove time info from start date (we only care about day). 
+            DateTime currentDay = new DateTime(start.Year, start.Month, start.Day);
+
+            while (currentDay <= end)
+            {
+                yield return currentDay;
+                currentDay = currentDay.AddDays(1);
+            }
+        }
+    }
+
     public class test
     {
-        public string Name { get; set; }
-        public int Count { get; set; }
+        public DateTime Date { get; set; }
+        public float Count { get; set; }
     }
 
     /// <summary>
@@ -31,7 +60,10 @@ namespace ReEksamenVinter16_17
     {
         private static HttpClient _client = new HttpClient();
 
-        private List<IndtagAfKalorier> _kalorieIndtags = new List<IndtagAfKalorier>();
+        private List<AllData> _kalorieIndtags = new List<AllData>();
+
+        private List<test> ToSendData = new List<test>();
+
 
         public MainWindow()
         {
@@ -47,15 +79,34 @@ namespace ReEksamenVinter16_17
 
             _kalorieIndtags = readDbData();
 
-            var list = new List<test>();
-            list.Add(new test() {Name = "Land1", Count = 1000});
 
-            
+            string today = "10/06-2017";
+            DateTime start = DateTime.Parse(today);
+
+            DateTime end = DateTime.Today;
+
+            foreach (DateTime day in start.EachDay(end))
+            {
+                var ToInsertInList = new test();
+                ToInsertInList.Date = day;
+                foreach (var i in _kalorieIndtags)
+                {
+                    ToInsertInList.Count += i.Kalorier;
+                }
+                ToSendData.Add(ToInsertInList);
+            }
+
+
+
+            //var list = new List<test>();
+            //list.Add(new test() { Name = "Land1", Count = 1000 });
+
+
 
         }
 
         #region GetDataFromDatabase
-        static List<IndtagAfKalorier> readDbData()
+        static List<AllData> readDbData()
         {
             var result = Task.Run(() => GetData()).Result;
             var settings = new JsonSerializerSettings
@@ -69,7 +120,7 @@ namespace ReEksamenVinter16_17
                 }
             };
 
-            var i = JsonConvert.DeserializeObject<List<IndtagAfKalorier>>(result, settings);
+            var i = JsonConvert.DeserializeObject<List<AllData>>(result, settings);
 
             return i;
 
@@ -79,7 +130,7 @@ namespace ReEksamenVinter16_17
         {
             string output = null;
 
-            var response = await _client.GetAsync($"api/KalorieIndtagAPI");
+            var response = await _client.GetAsync($"api/IndtastIndtagAPI");
             if (response.IsSuccessStatusCode)
             {
                 output = await response.Content.ReadAsStringAsync();
@@ -105,16 +156,19 @@ namespace ReEksamenVinter16_17
 
         private void DatePicker_OnCalendarClosed(object sender, RoutedEventArgs e)
         {
-            var energi = (from k in _kalorieIndtags
-                where k.Day == this.DatePicker.SelectedDate.Value
-                select k.Indtag).First();
+            var energi = (from k in ToSendData
+                          where k.Date == this.DatePicker.SelectedDate.Value
+                          select k.Count).First();
 
             this.KalorieprDag.Text = energi.ToString();
+
+
+
         }
 
         private void ChartButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ChartWindow window = new ChartWindow(_kalorieIndtags);
+            ChartWindow window = new ChartWindow(ToSendData);
             window.Show();
             this.Hide();
         }

@@ -18,7 +18,7 @@ namespace ReEksamenVinter16_17
     public class ChartClass
     {
         public DateTime Date { get; set; }
-        public int Count { get; set; }
+        public float Count { get; set; }
 
     }
     /// <summary>
@@ -29,11 +29,15 @@ namespace ReEksamenVinter16_17
         private bool StartChoosen = false;
         private bool EndChoosen = false;
 
-        private List<IndtagAfKalorier> AllData = new List<IndtagAfKalorier>();
-        public ChartWindow(List<IndtagAfKalorier> liste)
+        private List<ChartClass> AllData = new List<ChartClass>();
+        public ChartWindow(List<test> liste)
         {
             InitializeComponent();
-            AllData = liste;
+
+            foreach (var i in liste)
+                AllData.Add(new ChartClass() {Count = i.Count, Date = i.Date});
+
+            //AllData = liste;
         }
 
         private void DisplayButton_OnClick(object sender, RoutedEventArgs e)
@@ -43,16 +47,16 @@ namespace ReEksamenVinter16_17
                 StartChoosen = false;
                 StartChoosen = false;
 
-                var ToDisplay = (from d in AllData
-                                where (d.Day >= this.DatePickerStart.SelectedDate && d.Day <= this.DatePickerSlut.SelectedDate)
-                                select d).ToList();
+                //var ToDisplay = (from d in AllData
+                //                where (d.Day >= this.DatePickerStart.SelectedDate && d.Day <= this.DatePickerSlut.SelectedDate)
+                //                select d).ToList();
 
-                List<ChartClass> toDisplayList = new List<ChartClass>();
+                //List<ChartClass> toDisplayList = new List<ChartClass>();
 
-                foreach (var i in ToDisplay)
-                    toDisplayList.Add(new ChartClass() {Date = i.Day, Count = i.Indtag});
+                //foreach (var i in ToDisplay)
+                //    toDisplayList.Add(new ChartClass() {Date = i.Day, Count = i.Indtag});
 
-                this.Chart.ItemsSource = toDisplayList;
+                this.Chart.ItemsSource = AllData;
             }
  
         }
