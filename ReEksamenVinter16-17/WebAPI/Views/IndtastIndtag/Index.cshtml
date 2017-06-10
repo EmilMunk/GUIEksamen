@@ -1,0 +1,65 @@
+﻿@using WebAPI.Models
+@model IEnumerable<WebAPI.Models.Indtag>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Day)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MadVare)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kalorier)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MadVare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kalorier)
+            </td>
+        
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            
+        </td>
+        <td></td>
+        <td></td>
+        <td>
+            Total : @ViewBag.TotalAmount
+        </td>
+        <td></td>
+    </tr>
+   
+</table>
+
+@*<a> @Html.Action("PostKalorieIndtag", "KalorieIndtagAPI"); } </a>*@

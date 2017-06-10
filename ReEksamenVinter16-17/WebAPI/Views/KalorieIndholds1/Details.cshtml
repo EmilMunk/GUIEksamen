@@ -1,0 +1,34 @@
+﻿@model WebAPI.Models.KalorieIndhold
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KalorieIndhold</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MadVare)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MadVare)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Energi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Energi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

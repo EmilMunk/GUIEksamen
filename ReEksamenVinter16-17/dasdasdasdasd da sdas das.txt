@@ -1,0 +1,8 @@
+<metroChart:ClusteredBarChart x:Name="barchart1" 
+                             ChartSubTitle="Population in millions" 
+                             ChartTitle="Countries by population">
+            <metroChart:ClusteredBarChart.Series>
+                <metroChart:ChartSeries DisplayMember="Name" Name="Chart"
+                               ValueMember="Count" />
+            </metroChart:ClusteredBarChart.Series>
+        </metroChart:ClusteredBarChart>
