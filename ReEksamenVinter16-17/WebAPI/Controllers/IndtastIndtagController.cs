@@ -79,7 +79,7 @@ namespace WebAPI.Controllers
                     where k.MadVare == indtag.MadVare
                     select k.Energi).First();
 
-                indtag.Kalorier = double.Parse(kcal) * indtag.Amount;
+                indtag.Kalorier = double.Parse(kcal) * indtag.Amount /100;
 
                 db.IndtastIndtag.Add(indtag);
                 db.SaveChanges();

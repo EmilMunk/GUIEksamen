@@ -22,7 +22,7 @@
             <ComboBox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=MadVare}" Name="Combo"  MinWidth="50">
                 
             </ComboBox>
-            <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" MinWidth="50" VerticalAlignment="Center" Text="{Binding Path=Gram}" AcceptsReturn="True"  >
+            <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" MinWidth="50" VerticalAlignment="Center" Text="{Binding Path=Amount}" AcceptsReturn="True"  >
 
             </TextBox>
         </Grid>

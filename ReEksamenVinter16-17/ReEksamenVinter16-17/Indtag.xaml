@@ -27,15 +27,15 @@
             </Grid.RowDefinitions>
             <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Add" FontSize="20" Command="{Binding AddCommand}">
             </Button>
-            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Delete" FontSize="20" ></Button>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Delete" FontSize="20" Command="{Binding DeleteCommand}"></Button>
 
         </Grid>
-        <ListView Name="lvUsers" ItemsSource="{Binding}" SelectedItem="{Binding Path=CurrentFødevare }">
+        <ListView Name="lvUsers" ItemsSource="{Binding}" SelectedItem="{Binding Path=CurrentFødevare }" SelectedIndex="{Binding Path=CurrentIndex}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Fødevare" Width="auto" DisplayMemberBinding="{Binding Path=MadVare}" />
-                    <GridViewColumn Header="Gram" Width="50" DisplayMemberBinding="{Binding Path=Gram}"></GridViewColumn>
-                    <GridViewColumn Header="Kcal / 100gram" Width="auto" DisplayMemberBinding="{Binding Path=Energi}" />
+                    <GridViewColumn Header="Gram" Width="50" DisplayMemberBinding="{Binding Path=Amount}"></GridViewColumn>
+                    <GridViewColumn Header="Kcal / 100gram" Width="auto" DisplayMemberBinding="{Binding Path=Kalorier}" />
                 </GridView>
             </ListView.View>
         </ListView>

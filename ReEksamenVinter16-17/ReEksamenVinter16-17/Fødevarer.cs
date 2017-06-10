@@ -76,10 +76,45 @@ namespace ReEksamenVinter16_17
             var response = await _client.PostAsync("api/KalorieIndholds", new StringContent(json, Encoding.UTF8, "application/json"));
         }
 
+        static async void DeleteFødevare(int id)
+        {
+           // StringContent content = new StringContent(JsonConvert.SerializeObject(toInsert));
+            //string json = JsonConvert.SerializeObject(toInsert);
+
+            //var response = await _client.PostAsync("api/KalorieIndholds", new StringContent(json, Encoding.UTF8, "application/json"));
+
+            var response = await _client.DeleteAsync($"api/KalorieIndholds/{id}");
+
+        }
+
         #endregion
 
 
         #region Commands
+
+        private ICommand _deleteCommand;
+
+        public ICommand DeleteCommand
+        {
+            get { return _deleteCommand ?? (_deleteCommand = new RelayCommand(DeleteFødevare)); }
+        }
+
+        private void DeleteFødevare()
+        {
+            var allData = readDbData();
+
+            var name = this[CurrentIndex];
+
+            var ToDelete = (from d in allData
+                where d.MadVare == name.MadVare
+                select d).First();
+
+            DeleteFødevare(ToDelete.ID);
+            //Remove(ToDelete);
+            this.RemoveItem(currentIndex);
+            NotifyPropertyChanged();
+        }
+
         ICommand _addCommand;
         public ICommand AddCommand
         {
@@ -99,7 +134,7 @@ namespace ReEksamenVinter16_17
                 CurrentFødevare = newAgent;
                 //dirty = true;
                 AddFødevare(newAgent);
-
+                NotifyPropertyChanged();
             }
         }
 
