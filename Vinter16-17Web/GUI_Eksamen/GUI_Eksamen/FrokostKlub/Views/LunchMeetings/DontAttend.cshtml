@@ -1,0 +1,49 @@
+﻿@model FrokostKlub.Models.LunchMeeting
+
+@{
+    ViewBag.Title = "DontAttend";
+}
+
+<h2>Cannot Attend</h2>
+
+<h3>Are you sure you do not want to attend?</h3>
+<div>
+    <h4>LunchMeeting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MeetingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeetingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Members.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Members.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="DontAttend" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

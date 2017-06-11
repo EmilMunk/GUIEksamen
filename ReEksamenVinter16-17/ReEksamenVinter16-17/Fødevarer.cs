@@ -60,7 +60,7 @@ namespace ReEksamenVinter16_17
         {
             string output = null;
 
-            var response = await _client.GetAsync($"api/KalorieIndholds");
+            var response = await _client.GetAsync($"api/MadVareAPI");
             if (response.IsSuccessStatusCode)
             {
                 output = await response.Content.ReadAsStringAsync();
@@ -73,7 +73,7 @@ namespace ReEksamenVinter16_17
             StringContent content = new StringContent(JsonConvert.SerializeObject(toInsert));
             string json = JsonConvert.SerializeObject(toInsert);
 
-            var response = await _client.PostAsync("api/KalorieIndholds", new StringContent(json, Encoding.UTF8, "application/json"));
+            var response = await _client.PostAsync("api/MadVareAPI", new StringContent(json, Encoding.UTF8, "application/json"));
         }
 
         static async void DeleteFødevare(int id)
@@ -83,7 +83,7 @@ namespace ReEksamenVinter16_17
 
             //var response = await _client.PostAsync("api/KalorieIndholds", new StringContent(json, Encoding.UTF8, "application/json"));
 
-            var response = await _client.DeleteAsync($"api/KalorieIndholds/{id}");
+            var response = await _client.DeleteAsync($"api/MadVareAPI/{id}");
 
         }
 

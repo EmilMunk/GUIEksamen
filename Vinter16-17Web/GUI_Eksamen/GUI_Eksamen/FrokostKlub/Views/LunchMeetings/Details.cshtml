@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FrokostKlub.Models.LunchMeeting>
+
+@{
+    ViewBag.Title = "Details";
+    DateTime date = Model.First().Date;
+    string name = Model.First().MeetingName;
+}
+
+<h2>Attendees for @name at @date</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Attendees
+        </th>
+        <th>
+            Phone number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Members.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Members.PhoneNr)
+            </td>
+            <td>
+                @Html.ActionLink("Cannot attend", "DontAttend", new { id = item.MeetingId })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

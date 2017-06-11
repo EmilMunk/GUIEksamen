@@ -86,7 +86,7 @@ namespace ReEksamenVinter16_17
         {
             string output = null;
 
-            var response = await _client.GetAsync($"api/IndtastIndtagAPI");
+            var response = await _client.GetAsync($"api/MadVareAPI");
             if (response.IsSuccessStatusCode)
             {
                 output = await response.Content.ReadAsStringAsync();
@@ -133,7 +133,7 @@ namespace ReEksamenVinter16_17
         {
             string output = null;
 
-            var response = await _client.GetAsync($"api/KalorieIndholds");
+            var response = await _client.GetAsync($"api/MadVareAPI");
             if (response.IsSuccessStatusCode)
             {
                 output = await response.Content.ReadAsStringAsync();
