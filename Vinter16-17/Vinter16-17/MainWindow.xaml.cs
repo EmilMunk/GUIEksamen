@@ -23,6 +23,8 @@ namespace Vinter16_17
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string> privateList;
+
         private string ChoosenPath = null;
         public MainWindow()
         {
@@ -55,21 +57,32 @@ namespace Vinter16_17
             this.List.Items.Clear();
             tbxFileName.Text = ChoosenPath;
             //var ext = new List<string> { "jpg", "gif", "png" };
-            var list = System.IO.Directory.GetFiles(ChoosenPath, "*.*", System.IO.SearchOption.TopDirectoryOnly)
+            privateList = System.IO.Directory.GetFiles(ChoosenPath, "*.*", System.IO.SearchOption.TopDirectoryOnly)
                .Where(file => new string[] { ".jpg", ".gif", ".png" }
                 .Contains(System.IO.Path.GetExtension(file)))
                 .ToList();
 
-            foreach (var file in list)
+            foreach (var file in privateList)
                 this.List.Items.Add(System.IO.Path.GetFileName(file));
         }
 
         private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var image = new BitmapImage(new Uri(this.tbxFileName.Text + "\\" + this.List.SelectedItem.ToString()));
+            try
+            {
+                var image = new BitmapImage(new Uri(this.tbxFileName.Text + "\\" + this.List.SelectedItem.ToString()));
 
-            this.CurrentImage.Source = image;
-            this.CurrentImage.Stretch = Stretch.Uniform;
+                this.CurrentImage.Source = image;
+                this.CurrentImage.Stretch = Stretch.Uniform;
+            }
+            catch
+            {
+                
+            }
+            finally
+            {
+                
+            }
         }
 
         private void NewName_Click(object sender, RoutedEventArgs e)
@@ -84,12 +97,23 @@ namespace Vinter16_17
         public void copyAndMove(string oldName, string newName)
         {
             var index = 0;
-            DirectoryInfo d = new DirectoryInfo(oldName);
-            FileInfo[] infos = d.GetFiles();
-            foreach (FileInfo f in infos)
+            //DirectoryInfo d = new DirectoryInfo(oldName);
+            //FileInfo[] infos = d.GetFiles();
+            foreach (var f in privateList)
             {
-                File.Move(f.FullName, this.tbxFileName.Text + "\\"+ newName + $" - {++index}" + ".jpg");
+                File.Move(f, this.tbxFileName.Text + "\\"+ newName + $" - {++index}" + ".jpg");
             }
+        }
+
+        private void DoNotShow_OnClick(object sender, RoutedEventArgs e)
+        {
+            var image = new BitmapImage();
+
+            this.CurrentImage.Source = image;
+            this.CurrentImage.Stretch = Stretch.Uniform;
+
+            this.CurrentImage.Source = null;
+
         }
     }
 }

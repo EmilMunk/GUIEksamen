@@ -46,6 +46,7 @@
                     Content="Change Name" 
                     FontSize="12"
                     VerticalAlignment="Center" Click="NewName_Click"/>
+            <Button Name="DoNotShow" Content="DoNotShow" FontSize="12" Click="DoNotShow_OnClick"></Button>
         </ToolBar>
 
         <Grid Margin="0,5,0,-366">
