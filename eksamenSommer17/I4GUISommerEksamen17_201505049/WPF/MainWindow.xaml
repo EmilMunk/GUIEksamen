@@ -28,7 +28,7 @@
         <!--ListBox template-->
         <DataTemplate x:Key="ListBoxTemplate">
             <WrapPanel>
-                <TextBlock Text="{Binding Path=Description}" Padding="5,0" Width="120"></TextBlock>
+                <TextBlock Text="{Binding Path=Description}" Padding="5,0"></TextBlock>
             </WrapPanel>
         </DataTemplate>
     </Window.Resources>
