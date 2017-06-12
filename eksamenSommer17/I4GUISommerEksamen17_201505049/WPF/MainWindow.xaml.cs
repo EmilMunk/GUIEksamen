@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.Controllere;
+using WPF.Modeller;
 
 namespace WPF
 {
@@ -23,6 +25,38 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ToDoList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BackLogController context = (BackLogController)this.DataContext;
+            string name = ((ListBox) sender).Name;
+
+            context.ViewDetails(name);
+        }
+
+        private void DoingList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BackLogController context = (BackLogController)this.DataContext;
+            string name = ((ListBox)sender).Name;
+
+            context.ViewDetails(name);
+        }
+
+        private void ReviewList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BackLogController context = (BackLogController)this.DataContext;
+            string name = ((ListBox)sender).Name;
+
+            context.ViewDetails(name);
+        }
+
+        private void DoneList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BackLogController context = (BackLogController)this.DataContext;
+            string name = ((ListBox)sender).Name;
+
+            context.ViewDetails(name);
         }
     }
 }

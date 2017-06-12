@@ -4,9 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
+        xmlns:controllere="clr-namespace:WPF.Controllere"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="350" Width="800">
+    <Window.DataContext>
+        <controllere:BackLogController></controllere:BackLogController>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="{x:Type Label}" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+
+        <!--ListBox template-->
+        <DataTemplate x:Key="ListBoxTemplate">
+            <WrapPanel>
+                <TextBlock Text="{Binding Path=Description}" Padding="5,0" Width="120"></TextBlock>
+            </WrapPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Add new Item" Command="{Binding AddCommand}"></Button>
+        </ToolBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">To Do</Label>
+            <Label Grid.Column="1" Grid.Row="0">Doing</Label>
+            <Label Grid.Column="2" Grid.Row="0">Review</Label>
+            <Label Grid.Column="3" Grid.Row="0">Done</Label>
+            <ListBox Name="ToDoList" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=ToDo}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ToDoCurrentIndex}" MouseDoubleClick="ToDoList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="DoingList" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Doing}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoingCurrentIndex}" MouseDoubleClick="DoingList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="ReviewList" Grid.Column="2" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Review}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ReviewCurrentIndex}" MouseDoubleClick="ReviewList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="DoneList" Grid.Column="3" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Done}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoneCurrentIndex}" MouseDoubleClick="DoneList_OnMouseDoubleClick"></ListBox>
+
+        </Grid>
+    </DockPanel>
 </Window>
+
