@@ -10,7 +10,7 @@
 }
 
 .navbar-inverse {
-  background-color: darkcyan  
+    background-color: darkcyan !important; 
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -25,7 +25,7 @@ textarea {
 }
 
 .DeleteButton {
-    background-color: lightcoral
+    background-color: lightcoral;
 }
 
 .PaddingOnUl {
@@ -37,21 +37,21 @@ textarea {
 
 .PartyButton{}
 
-.priorityHigh {
+.priorityHigh{
     background-color: red
 
 }
 
-.priorityMedium {
+.priorityMedium{
     background-color: orange
 
 }
-.priorityLow {
-    background-color: purple
+.priorityLow{
+    background-color: green
 
 }
-.priorityVeryLow {
-    background-color: green
+.priorityVeryLow{
+    background-color: lightgreen;
 
 }
 

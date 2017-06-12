@@ -118,6 +118,17 @@ namespace WPF.Controllere
             }
             NotifyPropertyChanged();
         }
+        public void RefreshMainWindow(BackLog item)
+        {
+                if (item.States == BackLog.State.IsToDo)
+                    ToDo.Add(item);
+                else if (item.States == BackLog.State.IsDoing)
+                    Doing.Add(item);
+                else if (item.States == BackLog.State.Backlog)
+                    Backlog.Add(item);
+                else
+                    Done.Add(item);
+        }
 
         #region WebAPI 
 
@@ -256,7 +267,8 @@ namespace WPF.Controllere
                     if (dlg.ShowDialog() == true)
                     {
                         PutTask(toEdit);
-                        RefreshMainWindow();
+                        Backlog.Remove(toEdit);
+                        RefreshMainWindow(toEdit);
                     }
                     break;
                 case "IsToDo":
@@ -266,7 +278,8 @@ namespace WPF.Controllere
                     if (dlg.ShowDialog() == true)
                     {
                         PutTask(toEdit);
-                        RefreshMainWindow();
+                        ToDo.Remove(toEdit);
+                        RefreshMainWindow(toEdit);
                     }
                     break;
                 case "Doing":
@@ -276,7 +289,8 @@ namespace WPF.Controllere
                     if (dlg.ShowDialog() == true)
                     {
                         PutTask(toEdit);
-                        RefreshMainWindow();
+                        Doing.Remove(toEdit);
+                        RefreshMainWindow(toEdit);
                     }
                     break;
                 case "Done":
@@ -286,7 +300,8 @@ namespace WPF.Controllere
                     if (dlg.ShowDialog() == true)
                     {
                         PutTask(toEdit);
-                        RefreshMainWindow();
+                        Done.Remove(toEdit);
+                        RefreshMainWindow(toEdit);
                     }
                     break;
                 default:
