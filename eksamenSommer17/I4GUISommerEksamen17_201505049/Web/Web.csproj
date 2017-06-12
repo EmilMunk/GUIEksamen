@@ -253,6 +253,14 @@
     <Compile Include="Migrations\201706120759054_RangeOnPriority.Designer.cs">
       <DependentUpon>201706120759054_RangeOnPriority.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120808453_lavetEnum.cs" />
+    <Compile Include="Migrations\201706120808453_lavetEnum.Designer.cs">
+      <DependentUpon>201706120808453_lavetEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706120811572_EnumStateProp.cs" />
+    <Compile Include="Migrations\201706120811572_EnumStateProp.Designer.cs">
+      <DependentUpon>201706120811572_EnumStateProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -346,6 +354,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706120759054_RangeOnPriority.resx">
       <DependentUpon>201706120759054_RangeOnPriority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120808453_lavetEnum.resx">
+      <DependentUpon>201706120808453_lavetEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120811572_EnumStateProp.resx">
+      <DependentUpon>201706120811572_EnumStateProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

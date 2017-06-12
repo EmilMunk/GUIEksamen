@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Web.Models.BackLog>
+﻿@using Web.Models
+@model IEnumerable<Web.Models.BackLog>
 
 @{
     ViewBag.Title = "Index";
@@ -7,21 +8,21 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New Backlog item", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IsToDo)
+        @(BackLog.State.IsToDo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsDoing)
+            @(BackLog.State.IsDoing)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Review)
+            @(BackLog.State.Review)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Done)
+            @(BackLog.State.Done)
         </th>
         <th></th>
     </tr>
@@ -29,31 +30,30 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @if (item.IsToDo == true)
+            @if (item.States == BackLog.State.IsToDo)
             {
-                @Html.DisplayFor(modelItem => item.Description);
-            }
-        </td>
-        <td>
-            @if (item.IsDoing == true)
-            {
-                @Html.DisplayFor(modelItem => item.Description);
-            }
-        </td>
-        <td>
-            @if (item.Review == true)
-            {
-                @Html.DisplayFor(modelItem => item.Description);
-            }
-            
-        </td>
-        <td>
-            @if (item.Done == true)
-            {
-                @Html.DisplayFor(modelItem => item.Description);
+                @Html.DisplayFor(modelItem => item.Description)
             }
            
-        </td> 
+        </td>
+        <td>
+            @if (item.States == BackLog.State.IsDoing)
+            {
+                @Html.DisplayFor(modelItem => item.Description)
+            }
+        </td>
+        <td>
+            @if (item.States == BackLog.State.Review)
+            {
+                @Html.DisplayFor(modelItem => item.Description)
+            }
+        </td>
+        <td>
+            @if (item.States == BackLog.State.Done)
+            {
+                @Html.DisplayFor(modelItem => item.Description)
+            }
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.BackLogId }) |
             @Html.ActionLink("Details", "Details", new { id=item.BackLogId }) |

@@ -16,11 +16,7 @@ namespace Web.Models
         public int Priority { get; set; }
         [Required]
         public double EstimatedTime { get; set; }
-        [Required]
-        public string Accountability { get; set; }
-        public bool IsToDo { get; set; }
-        public bool IsDoing { get; set; }
-        public bool Review { get; set; }
-        public bool Done { get; set; }
+        public enum State { IsToDo, IsDoing, Review, Done }
+        public State States { get; set; }
     }
 }

@@ -18,7 +18,9 @@ namespace Web.Controllers
         // GET: BackLogWeb
         public ActionResult Index()
         {
-            return View(db.BackLogs.ToList());
+            var returnListe = db.BackLogs.OrderBy(o => o.Priority).ToList();
+
+            return View(returnListe);
         }
 
         // GET: BackLogWeb/Details/5
@@ -47,11 +49,10 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,Accountability,IsToDo,IsDoing,Review,Done")] BackLog backLog)
+        public ActionResult Create([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,States")] BackLog backLog)
         {
             if (ModelState.IsValid)
             {
-                backLog.IsToDo = true;
                 db.BackLogs.Add(backLog);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -72,10 +73,6 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
-            var list = new List<bool>();
-
-            
-            ViewBag.Liste = list;
             return View(backLog);
         }
 
@@ -84,7 +81,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,Accountability,IsToDo,IsDoing,Review,Done")] BackLog backLog)
+        public ActionResult Edit([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,States")] BackLog backLog)
         {
             if (ModelState.IsValid)
             {
