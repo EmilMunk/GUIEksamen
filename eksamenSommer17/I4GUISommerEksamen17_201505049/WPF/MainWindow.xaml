@@ -56,6 +56,7 @@
             </Canvas>
             <Button Content="New sprint" Height="25" Command="{Binding NewScrumCommand}"></Button>
             <Button Content="Show graph" Command="{Binding ShowGraph}" ></Button>
+            <Button Content="Manual update board" Command="{Binding Refresh}"></Button>
         </ToolBar>
         <Grid>
             <Grid.RowDefinitions>

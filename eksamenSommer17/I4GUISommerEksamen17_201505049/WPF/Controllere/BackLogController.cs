@@ -166,6 +166,36 @@ namespace WPF.Controllere
             }
         }
 
+        private ICommand _refresh;
+        public ICommand Refresh
+        {
+            get { return _refresh ?? (_refresh = new RelayCommand(RefreshMainWindow)); }
+        }
+
+
+
+        public void RefreshMainWindow()
+        {
+            ToDo.Clear();
+            Doing.Clear();
+            Backlog.Clear();
+            Done.Clear();
+
+            var result = readDbDataToDisplay();
+
+            foreach (var i in result)
+            {
+                if (i.States == BackLog.State.IsToDo)
+                    ToDo.Add(i);
+                else if (i.States == BackLog.State.IsDoing)
+                    Doing.Add(i);
+                else if (i.States == BackLog.State.Backlog)
+                    Backlog.Add(i);
+                else
+                    Done.Add(i);
+            }
+        }
+
         /// <summary>
         /// Method that will refresh all the data in the view. Specifically it will add a backlog item to the new correct Observable list
         /// This is called from the edit Command, so we after deleted the item from the prvious view, add it to the new view.
