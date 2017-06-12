@@ -234,13 +234,29 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackLogWebController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DAL\Context.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120720330_first.cs" />
+    <Compile Include="Migrations\201706120720330_first.Designer.cs">
+      <DependentUpon>201706120720330_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706120758118_RequiredPoints.cs" />
+    <Compile Include="Migrations\201706120758118_RequiredPoints.Designer.cs">
+      <DependentUpon>201706120758118_RequiredPoints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706120759054_RangeOnPriority.cs" />
+    <Compile Include="Migrations\201706120759054_RangeOnPriority.Designer.cs">
+      <DependentUpon>201706120759054_RangeOnPriority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BackLog.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -304,6 +320,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\BackLogWeb\Create.cshtml" />
+    <Content Include="Views\BackLogWeb\Delete.cshtml" />
+    <Content Include="Views\BackLogWeb\Details.cshtml" />
+    <Content Include="Views\BackLogWeb\Edit.cshtml" />
+    <Content Include="Views\BackLogWeb\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,6 +336,17 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706120720330_first.resx">
+      <DependentUpon>201706120720330_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120758118_RequiredPoints.resx">
+      <DependentUpon>201706120758118_RequiredPoints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120759054_RangeOnPriority.resx">
+      <DependentUpon>201706120759054_RangeOnPriority.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

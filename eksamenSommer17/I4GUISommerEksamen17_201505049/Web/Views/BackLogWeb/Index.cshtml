@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Web.Models.BackLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Backlog item", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsToDo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDoing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Done)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.IsToDo == true)
+            {
+                @Html.DisplayFor(modelItem => item.Description);
+            }
+        </td>
+        <td>
+            @if (item.IsDoing == true)
+            {
+                @Html.DisplayFor(modelItem => item.Description);
+            }
+        </td>
+        <td>
+            @if (item.Review == true)
+            {
+                @Html.DisplayFor(modelItem => item.Description);
+            }
+            
+        </td>
+        <td>
+            @if (item.Done == true)
+            {
+                @Html.DisplayFor(modelItem => item.Description);
+            }
+           
+        </td> 
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BackLogId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BackLogId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BackLogId })
+        </td>
+    </tr>
+}
+
+</table>
