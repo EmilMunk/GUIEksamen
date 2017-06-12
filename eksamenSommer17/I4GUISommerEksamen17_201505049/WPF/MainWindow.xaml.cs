@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,13 @@ namespace WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public SolidBrush BackgroundBrush { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            //BackgroundBrush = new SolidBrush((System.Drawing.Color)System.Drawing.ColorConverter.ConvertFromString(Properties.Settings.Default.Color));
+
         }
 
         private void ToDoList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -58,5 +63,7 @@ namespace WPF
 
             context.ViewDetails(name);
         }
+
+       
     }
 }

@@ -9,7 +9,9 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using MvvmFoundation.Wpf;
 using Newtonsoft.Json;
 using WPF.Modeller;
@@ -25,6 +27,8 @@ namespace WPF.Controllere
         public ObservableCollection<BackLog> _doing = new ObservableCollection<BackLog>();
         public ObservableCollection<BackLog> _backlog = new ObservableCollection<BackLog>();
         public ObservableCollection<BackLog> _done = new ObservableCollection<BackLog>();
+
+        private SolidColorBrush _backgroundColor;
 
 
         public ObservableCollection<BackLog> ToDo
@@ -74,8 +78,23 @@ namespace WPF.Controllere
                 else
                     Done.Add(i);
             }
+
+            string color = Properties.Settings.Default.Color;
+            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+            BackgroundColor = brush;
+
             NotifyPropertyChanged();
 
+        }
+
+        public SolidColorBrush BackgroundColor
+        {
+            get { return _backgroundColor; }
+            set
+            {
+                _backgroundColor = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public void RefreshMainWindow()
@@ -181,7 +200,49 @@ namespace WPF.Controllere
             }
         }
 
-       
+        ICommand _closeCommand;
+        public ICommand CloseCommand
+        {
+            get { return _closeCommand ?? (_closeCommand = new RelayCommand(Close)); }
+        }
+
+        private void Close()
+        {
+            Application.Current.MainWindow.Close();
+        }
+
+        ICommand _changeColorToBlue;
+        public ICommand ChangeColorToBlue
+        {
+            get { return _changeColorToBlue ?? (_changeColorToBlue = new RelayCommand(ChangeColorToBlueExecute)); }
+        }
+
+        private void ChangeColorToBlueExecute()
+        {
+            Properties.Settings.Default.Color = "Aquamarine";
+            Properties.Settings.Default.Save();
+            string color = Properties.Settings.Default.Color;
+            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+            BackgroundColor = brush;
+        }
+
+
+        ICommand _changeColorToDefault;
+        public ICommand ChangeColorToDefault
+        {
+            get { return _changeColorToDefault ?? (_changeColorToDefault = new RelayCommand(ChangeColorToDefaultExecute)); }
+        }
+
+        private void ChangeColorToDefaultExecute()
+        {
+            Properties.Settings.Default.Color = "White";
+            Properties.Settings.Default.Save();
+            string color = Properties.Settings.Default.Color;
+            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+            BackgroundColor = brush;
+        }
+
+
         public void ViewDetails(string name)
         {
             var dlg = new EditView();

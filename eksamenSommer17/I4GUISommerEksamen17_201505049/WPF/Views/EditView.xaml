@@ -55,10 +55,10 @@
             <Label Grid.Column="0" Grid.Row="2">EstimatedTime:</Label>
             <Label Grid.Column="0" Grid.Row="3">Responsible:</Label>
             <Label Grid.Column="0" Grid.Row="4">Status:</Label>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Description}"></TextBox>
+            <TextBox Name="Description"  Grid.Column="1" Grid.Row="0" Text="{Binding Path=Description}"></TextBox>
             <ComboBox Name="ComboPrio" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding CmbContent2}" SelectedItem="{Binding Path=Priority}"></ComboBox>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=EstimatedTime}"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Responsible}"></TextBox>
+            <TextBox Name="EstimatedTime" Grid.Column="1" Grid.Row="2" Text="{Binding Path=EstimatedTime}"></TextBox>
+            <TextBox Name="Responsible" Grid.Column="1" Grid.Row="3" Text="{Binding Path=Responsible}"></TextBox>
             <ComboBox Name="comboStates"  Grid.Column="1" Grid.Row="4" ItemsSource="{Binding cmbContent1}" SelectedItem="{Binding Path=States}"></ComboBox>
         </Grid>
 

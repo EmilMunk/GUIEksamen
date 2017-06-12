@@ -6,16 +6,23 @@
         xmlns:local="clr-namespace:WPF"
         xmlns:controllere="clr-namespace:WPF.Controllere"
         mc:Ignorable="d"
-        Title="ScrumBoard 9001" Height="350" Width="800">
+        Title="ScrumBoard 9001" Height="350" Width="800"
+        Background="{Binding Path=BackgroundColor}">
     <Window.DataContext>
         <controllere:BackLogController></controllere:BackLogController>
     </Window.DataContext>
+    <!-- Colors -->
+
     <Window.Resources>
         <Style x:Key="{x:Type Label}" TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DockPanel}">
+            <Setter Property="Background" Value="{Binding Path=BackgroundBrush}"/>
         </Style>
 
         <!--ListBox template-->
@@ -26,12 +33,21 @@
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Filer">
+                <MenuItem Header="_Close" Command="{Binding CloseCommand}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header ="_Colors">
+                <MenuItem Name="DefaultColor"  Header="Default" Command="{Binding ChangeColorToDefault}"></MenuItem>
+                <MenuItem Name="LightBlueColor" Header="LightBlue" Command="{Binding ChangeColorToBlue}"></MenuItem>
+            </MenuItem>
+        </Menu>
         <ToolBar DockPanel.Dock="Top">
             <Button Height="25" Width="25" Command="{Binding AddCommand}">
                 <Image Source="images/plus.png"></Image>
             </Button>
             <Canvas Width="10">
-                <!-- Draws a diagonal line from (10,10) to (50,50). -->
+                <!-- Draws a straight line from (10,10) to (0,25). -->
                 <Line
                     X1="10" Y1="0"
                     X2="10" Y2="25"
@@ -54,10 +70,10 @@
             <Label Grid.Column="1" Grid.Row="0">To Do</Label>
             <Label Grid.Column="2" Grid.Row="0">Doing</Label>
             <Label Grid.Column="3" Grid.Row="0">Done</Label>
-            <ListBox Name="Backlog" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Backlog}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=BackLogCurrentIndex}" MouseDoubleClick="ToDoList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="IsToDo" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=ToDo}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ToDoCurrentIndex}" MouseDoubleClick="DoingList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="Doing" Grid.Column="2" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Doing}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoingCurrentIndex}" MouseDoubleClick="ReviewList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="Done" Grid.Column="3" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Done}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoneCurrentIndex}" MouseDoubleClick="DoneList_OnMouseDoubleClick"></ListBox>
+            <ListBox Background="{Binding Path=BackgroundColor}" Name="Backlog" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Backlog}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=BackLogCurrentIndex}" MouseDoubleClick="ToDoList_OnMouseDoubleClick"></ListBox>
+            <ListBox Background="{Binding Path=BackgroundColor}" Name="IsToDo" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=ToDo}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ToDoCurrentIndex}" MouseDoubleClick="DoingList_OnMouseDoubleClick"></ListBox>
+            <ListBox Background="{Binding Path=BackgroundColor}" Name="Doing" Grid.Column="2" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Doing}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoingCurrentIndex}" MouseDoubleClick="ReviewList_OnMouseDoubleClick"></ListBox>
+            <ListBox Background="{Binding Path=BackgroundColor}" Name="Done" Grid.Column="3" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Done}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoneCurrentIndex}" MouseDoubleClick="DoneList_OnMouseDoubleClick"></ListBox>
 
         </Grid>
     </DockPanel>

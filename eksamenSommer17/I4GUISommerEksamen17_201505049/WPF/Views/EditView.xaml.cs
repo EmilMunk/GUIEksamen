@@ -50,7 +50,12 @@ namespace WPF.Views
 
         private void DoneButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (this.Description.Text != "" && this.EstimatedTime.Text != "" && this.Responsible.Text != "")
+                DialogResult = true;
+            else
+            {
+                MessageBox.Show("You did it wrong, try again.");
+            }
         }
     }
 }
