@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF"
         xmlns:controllere="clr-namespace:WPF.Controllere"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="800">
+        Title="ScrumBoard 9001" Height="350" Width="800">
     <Window.DataContext>
         <controllere:BackLogController></controllere:BackLogController>
     </Window.DataContext>
@@ -27,7 +27,17 @@
     </Window.Resources>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <Button Content="Add new Item" Command="{Binding AddCommand}"></Button>
+            <Button Height="25" Width="25" Command="{Binding AddCommand}">
+                <Image Source="images/plus.png"></Image>
+            </Button>
+            <Canvas Width="10">
+                <!-- Draws a diagonal line from (10,10) to (50,50). -->
+                <Line
+                    X1="10" Y1="0"
+                    X2="10" Y2="25"
+                    Stroke="Black"
+                    StrokeThickness="4" />
+            </Canvas>
         </ToolBar>
         <Grid>
             <Grid.RowDefinitions>

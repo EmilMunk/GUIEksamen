@@ -10,19 +10,20 @@
     <Window.Resources>
         <Style x:Key="{x:Type Label}" TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
         </Style>
         <Style x:Key="{x:Type TextBox}" TargetType="TextBox">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="MinWidth" Value="60"></Setter>
+            <Setter Property="MinWidth" Value="130"></Setter>
         </Style>
         <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="MinWidth" Value="60"></Setter>
+            <Setter Property="MinWidth" Value="130"></Setter>
         </Style>
     </Window.Resources>
     

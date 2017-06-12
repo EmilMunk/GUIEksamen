@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,19 @@ namespace WPF.Views
     /// </summary>
     public partial class AddTask : Window
     {
+        public ObservableCollection<int> cmbContent2 { get; set; }
+
         public AddTask()
         {
             InitializeComponent();
+
+
+            cmbContent2 = new ObservableCollection<int>();
+            cmbContent2.Add(1);
+            cmbContent2.Add(2);
+            cmbContent2.Add(3);
+            cmbContent2.Add(4);
+            ComboPrio.ItemsSource = cmbContent2;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

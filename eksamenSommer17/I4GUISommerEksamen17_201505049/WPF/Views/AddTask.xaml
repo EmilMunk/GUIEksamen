@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.Views"
         mc:Ignorable="d"
-        Title="AddTask" Height="300" Width="300">
+        Title="Add Task" Height="300" Width="300">
     <Window.Resources>
         <Style x:Key="{x:Type Label}" TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
         </Style>
         <Style x:Key="{x:Type TextBox}" TargetType="TextBox">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="MinWidth" Value="60"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+            <Setter Property="MinWidth" Value="120"></Setter>
         </Style>
     </Window.Resources>
     <DockPanel>
@@ -39,7 +41,7 @@
             <Label Grid.Column="0" Grid.Row="3">EstimatedTime:</Label>
             <Label Grid.Column="0" Grid.Row="4">Responsible:</Label>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Description}"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Priority}"></TextBox>
+            <ComboBox Name="ComboPrio" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding CmbContent2}" SelectedItem="{Binding Path=Priority}" HorizontalAlignment="right" VerticalAlignment="Center" MinWidth="130"></ComboBox>
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=EstimatedTime}"></TextBox>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Responsible}"></TextBox>
         </Grid>
