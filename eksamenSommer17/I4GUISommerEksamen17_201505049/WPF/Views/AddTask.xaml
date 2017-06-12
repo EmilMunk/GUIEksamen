@@ -40,8 +40,10 @@
             <Label Grid.Column="0" Grid.Row="2">Priority:</Label>
             <Label Grid.Column="0" Grid.Row="3">EstimatedTime:</Label>
             <Label Grid.Column="0" Grid.Row="4">Responsible:</Label>
+            
             <TextBox Name="Description" Grid.Column="1" Grid.Row="1" Text="{Binding Path=Description}"></TextBox>
-            <ComboBox Name="ComboPrio" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding CmbContent2}" SelectedItem="{Binding Path=Priority}" HorizontalAlignment="right" VerticalAlignment="Center" MinWidth="130"></ComboBox>
+            <ComboBox Name="ComboPrio" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding CmbContent2}" SelectedItem="{Binding Path=Priority}" 
+                      HorizontalAlignment="right" VerticalAlignment="Center" MinWidth="130"></ComboBox>
             <TextBox Name="EstimatedTime" Grid.Column="1" Grid.Row="3" Text="{Binding Path=EstimatedTime}"></TextBox>
             <TextBox Name="Responsible" Grid.Column="1" Grid.Row="4" Text="{Binding Path=Responsible}"></TextBox>
         </Grid>
