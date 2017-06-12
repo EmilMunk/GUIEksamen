@@ -20,7 +20,8 @@ namespace Web.Controllers
         // GET: api/BackLogAPI
         public IQueryable<BackLog> GetBackLogs()
         {
-            return db.BackLogs;
+            var liste = db.BackLogs.OrderBy(o => o.Priority);
+            return liste;
         }
 
         // GET: api/BackLogAPI/5

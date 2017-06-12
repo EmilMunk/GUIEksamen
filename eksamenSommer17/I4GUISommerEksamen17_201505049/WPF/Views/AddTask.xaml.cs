@@ -27,7 +27,9 @@ namespace WPF.Views
         {
             InitializeComponent();
 
-
+            //This wil go and select the items to be shown in a combo box. This data will identical to a property's allowed data in the model.
+            //This is to set restrictions to the view by making it in a combo box.
+            //In the view I will directy use selectedItem and bind it the the context's property.
             cmbContent2 = new ObservableCollection<int>();
             cmbContent2.Add(1);
             cmbContent2.Add(2);

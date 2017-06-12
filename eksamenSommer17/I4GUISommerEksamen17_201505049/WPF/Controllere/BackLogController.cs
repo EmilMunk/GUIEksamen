@@ -19,6 +19,15 @@ using WPF.Views;
 
 namespace WPF.Controllere
 {
+    public class Chartclass
+    {
+        public string Sprint { get; set; }
+        public double Count { get; set; }
+    }
+
+    /// <summary>
+    /// Min observable collection. Den binder sig op af min model.
+    /// </summary>
     public class BackLogController : ObservableCollection<BackLog>, INotifyPropertyChanged
     {
         private static HttpClient _client = new HttpClient();
@@ -29,6 +38,22 @@ namespace WPF.Controllere
         public ObservableCollection<BackLog> _done = new ObservableCollection<BackLog>();
 
         private SolidColorBrush _backgroundColor;
+
+        private ObservableCollection<Chartclass> _toDisplayList = new ObservableCollection<Chartclass>();
+
+        public ObservableCollection<Chartclass> ToDisplayList
+        {
+            get
+            {
+                return _toDisplayList;
+            }
+            set
+            {
+                _toDisplayList = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
 
         public ObservableCollection<BackLog> ToDo
@@ -55,6 +80,10 @@ namespace WPF.Controllere
             set { _done = value; }
         }
 
+        /// <summary>
+        /// Ctor. Need to read all data from WebAPI (Database), and populate the above ObservableCollections. 
+        /// These bind to 4 different listbox in View.
+        /// </summary>
         public BackLogController()
         {
             if (_client.BaseAddress == null)
@@ -79,12 +108,52 @@ namespace WPF.Controllere
                     Done.Add(i);
             }
 
+            //Here I read settings file for background color of main window.
             string color = Properties.Settings.Default.Color;
             var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
             BackgroundColor = brush;
 
             NotifyPropertyChanged();
 
+            UpdateChart();
+
+
+        }
+
+        /// <summary>
+        /// Method that will update the observablecollection of the charts context.
+        /// This is bound to the view Databinding on the observablecollection
+        /// </summary>
+        public void UpdateChart()
+        {
+            ToDisplayList.Clear();
+            double added = 0;
+            double addedTotal = 0;
+            foreach (var index in ToDo)
+            {
+                added += index.EstimatedTime;
+            }
+            foreach (var index in Doing)
+            {
+                added += index.EstimatedTime;
+            }
+            foreach (var index in Backlog)
+            {
+                added += index.EstimatedTime;
+            }
+
+            addedTotal = added;
+
+            foreach (var index in Done)
+            {
+                addedTotal += index.EstimatedTime;
+            }
+
+            var toInsert = new ObservableCollection<Chartclass>();
+            toInsert.Add(new Chartclass() { Count = added, Sprint = "Tid tilbage" });
+            toInsert.Add(new Chartclass() { Count = addedTotal, Sprint = "Tid totalt" });
+            ToDisplayList = toInsert;
+            NotifyPropertyChanged();
         }
 
         public SolidColorBrush BackgroundColor
@@ -97,27 +166,11 @@ namespace WPF.Controllere
             }
         }
 
-        public void RefreshMainWindow()
-        {
-            ToDo.Clear();
-            Doing.Clear();
-            Backlog.Clear();
-            Done.Clear();
-            var result = readDbDataToDisplay();
-
-            foreach (var i in result)
-            {
-                if (i.States == BackLog.State.IsToDo)
-                    ToDo.Add(i);
-                else if (i.States == BackLog.State.IsDoing)
-                    Doing.Add(i);
-                else if (i.States == BackLog.State.Backlog)
-                    Backlog.Add(i);
-                else
-                    Done.Add(i);
-            }
-            NotifyPropertyChanged();
-        }
+        /// <summary>
+        /// Method that will refresh all the data in the view. Specifically it will add a backlog item to the new correct Observable list
+        /// This is called from the edit Command, so we after deleted the item from the prvious view, add it to the new view.
+        /// </summary>
+        /// <param name="item">Specific item you want to change to a new listbox in the view</param>
         public void RefreshMainWindow(BackLog item)
         {
                 if (item.States == BackLog.State.IsToDo)
@@ -130,8 +183,14 @@ namespace WPF.Controllere
                     Done.Add(item);
         }
 
+      
+
         #region WebAPI 
 
+        /// <summary>
+        /// Method that will get JSON from WebAPI, and deserialize the string to the object.
+        /// </summary>
+        /// <returns>The Deserialized list</returns>
         static List<BackLog> readDbDataToDisplay()
         {
             var result = Task.Run(() => GetDataToDisplay()).Result;
@@ -151,7 +210,10 @@ namespace WPF.Controllere
             return i;
 
         }
-
+        /// <summary>
+        /// GetAsync all objects in BackLog
+        /// </summary>
+        /// <returns></returns>
         static async Task<string> GetDataToDisplay()
         {
             string output = null;
@@ -165,10 +227,9 @@ namespace WPF.Controllere
         }
 
         
-
+        
         static async void AddTask(BackLog toInsert)
         {
-            //StringContent content = new StringContent(JsonConvert.SerializeObject(toInsert));
             string json = JsonConvert.SerializeObject(toInsert);
 
             var response = await _client.PostAsync("api/BackLogAPI", new StringContent(json, Encoding.UTF8, "application/json"));
@@ -176,15 +237,57 @@ namespace WPF.Controllere
 
         static async void PutTask(BackLog toInsert)
         {
-            //StringContent content = new StringContent(JsonConvert.SerializeObject(toInsert));
             string json = JsonConvert.SerializeObject(toInsert);
 
             var response = await _client.PutAsync($"api/BackLogAPI/{toInsert.BackLogId}", new StringContent(json, Encoding.UTF8, "application/json"));
         }
+        static async void DeleteTask(BackLog toInsert)
+        {
+            string json = JsonConvert.SerializeObject(toInsert);
+            var response = await _client.DeleteAsync($"api/BackLogAPI/{toInsert.BackLogId}");
+        }
 
-        #endregion
+    #endregion
 
         #region Commands
+
+        private ICommand _newScrumCommand;
+
+        public ICommand NewScrumCommand
+        {
+            get { return _newScrumCommand ?? (_newScrumCommand = new RelayCommand(NewScrumCommandExecute)); }
+        }
+        /// <summary>
+        /// Execution of new scrum that will dete tasks from Done, and put all current task to BackLog.
+        /// </summary>
+        public void NewScrumCommandExecute()
+        {
+            foreach (var i in Done)
+            {
+                DeleteTask(i);
+                
+            }
+
+            Done.Clear();
+
+            foreach (var i in Doing)
+            {
+                i.States = BackLog.State.Backlog;
+                PutTask(i);
+                Backlog.Add(i);
+            }
+            foreach (var i in ToDo)
+            {
+                i.States = BackLog.State.Backlog;
+                PutTask(i);
+                Backlog.Add(i);
+            }
+
+            Doing.Clear();
+            ToDo.Clear();
+
+
+        }
 
         ICommand _addCommand;
         public ICommand AddCommand
@@ -192,6 +295,9 @@ namespace WPF.Controllere
             get { return _addCommand ?? (_addCommand = new RelayCommand(AddTask)); }
         }
 
+        /// <summary>
+        /// Execeute that will add a new task. This will show a dialog with the AddTask.xaml window.
+        /// </summary>
         private void AddTask()
         {
 
@@ -200,6 +306,7 @@ namespace WPF.Controllere
             dlg.Title = "Add new task";
             BackLog newTask = new BackLog();
             dlg.DataContext = newTask;
+            // Here we have selected done, and we are ready to push the data to the database, and update the main window view.
             if (dlg.ShowDialog() == true)
             {
                 newTask.States = BackLog.State.Backlog;
@@ -208,7 +315,25 @@ namespace WPF.Controllere
                 Backlog.Add(newTask);
 
                 AddTask(newTask);
+
             }
+            UpdateChart();
+        }
+
+        ICommand _showGraph;
+        public ICommand ShowGraph
+        {
+            get { return _showGraph ?? (_showGraph = new RelayCommand(ShowGraphExecute)); }
+        }
+
+        /// <summary>
+        /// Show the graph in a modeless window, so it can be displayed alon side the main scrum board view.
+        /// </summary>
+        private void ShowGraphExecute()
+        {
+            var view = new Chart();
+            view.DataContext = this;
+            view.Show();
         }
 
         ICommand _closeCommand;
@@ -228,6 +353,9 @@ namespace WPF.Controllere
             get { return _changeColorToBlue ?? (_changeColorToBlue = new RelayCommand(ChangeColorToBlueExecute)); }
         }
 
+        /// <summary>
+        /// Settings command, to change background color to aquamarine. This will be saved in settings.settings as a string.
+        /// </summary>
         private void ChangeColorToBlueExecute()
         {
             Properties.Settings.Default.Color = "Aquamarine";
@@ -244,6 +372,9 @@ namespace WPF.Controllere
             get { return _changeColorToDefault ?? (_changeColorToDefault = new RelayCommand(ChangeColorToDefaultExecute)); }
         }
 
+        /// <summary>
+        /// Settings command, to change background color to white. This will be saved in settings.settings as a string.
+        /// </summary>
         private void ChangeColorToDefaultExecute()
         {
             Properties.Settings.Default.Color = "White";
@@ -253,11 +384,17 @@ namespace WPF.Controllere
             BackgroundColor = brush;
         }
 
-
+        /// <summary>
+        /// The edit execute command. This will be called from mainwindow code behind, since it is a double click method.
+        /// </summary>
+        /// <param name="name">A string that define which Listbox the method was called from</param>
         public void ViewDetails(string name)
         {
             var dlg = new EditView();
             BackLog toEdit = new BackLog();
+            //Each switch case will open a window see above, and will set the datacontext of the view to the current selected object in the specified listbox
+            //When this window is succesfully completed, it will sync the possible new data with the database, and remove it from the possible old list.
+            //After this it wil add it to the possible new list (if we have changed status or not).
             switch (name)
             {
                 case "Backlog":
@@ -307,6 +444,7 @@ namespace WPF.Controllere
                 default:
                     break;
             }
+            UpdateChart();
         }
 
         #endregion

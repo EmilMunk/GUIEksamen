@@ -13,6 +13,11 @@
     background-color: darkcyan !important; 
 }
 
+.navbar-inverse .navbar-collapse .navbar-nav > li > a {
+    color : lightgray
+}
+
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

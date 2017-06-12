@@ -32,6 +32,8 @@ namespace WPF
 
         }
 
+        // each of the blow events will bind to each lsitbox in the view. This is to call the ViewDetails, 
+        //that is the "Command" in the controller, that will get the current data for a item, and give the possibility to change some or all of it.
         private void ToDoList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BackLogController context = (BackLogController)this.DataContext;

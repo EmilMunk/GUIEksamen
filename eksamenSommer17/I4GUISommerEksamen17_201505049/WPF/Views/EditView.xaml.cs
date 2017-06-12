@@ -26,6 +26,9 @@ namespace WPF.Views
         public ObservableCollection<int> cmbContent2 { get; set; }
         public EditView()
         {
+            //This wil go and select the items to be shown in two combo boxes. This data will identical to a property's allowed data in the model.
+            //This is to set restrictions to the view by making it in a combo box.
+            //In the view I will directy use selectedItem and bind it the the context's property.
             InitializeComponent();
             cmbContent1 = new ObservableCollection<BackLog.State>();
             cmbContent1.Add(BackLog.State.Backlog);

@@ -54,6 +54,8 @@
                     Stroke="Black"
                     StrokeThickness="4" />
             </Canvas>
+            <Button Content="New sprint" Height="25" Command="{Binding NewScrumCommand}"></Button>
+            <Button Content="Show graph" Command="{Binding ShowGraph}" ></Button>
         </ToolBar>
         <Grid>
             <Grid.RowDefinitions>
