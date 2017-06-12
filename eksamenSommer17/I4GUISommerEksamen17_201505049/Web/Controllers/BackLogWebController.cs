@@ -23,6 +23,15 @@ namespace Web.Controllers
             return View(returnListe);
         }
 
+        public ActionResult UpdateState(int id, BackLog.State state)
+        {
+            BackLog backLog = db.BackLogs.Find(id);
+            backLog.States = state;
+            db.SaveChanges();
+            Index();
+            return View("Index");
+        }
+
         // GET: BackLogWeb/Details/5
         public ActionResult Details(int? id)
         {
