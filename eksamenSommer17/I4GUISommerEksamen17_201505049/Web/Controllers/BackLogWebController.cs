@@ -53,7 +53,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                backLog.States = BackLog.State.IsToDo;
+                backLog.States = BackLog.State.Backlog;
                 db.BackLogs.Add(backLog);
                 db.SaveChanges();
                 return RedirectToAction("Index");

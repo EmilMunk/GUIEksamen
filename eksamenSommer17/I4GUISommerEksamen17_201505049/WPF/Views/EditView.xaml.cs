@@ -28,9 +28,10 @@ namespace WPF.Views
         {
             InitializeComponent();
             cmbContent1 = new ObservableCollection<BackLog.State>();
+            cmbContent1.Add(BackLog.State.Backlog);
             cmbContent1.Add(BackLog.State.IsToDo);
             cmbContent1.Add(BackLog.State.IsDoing);
-            cmbContent1.Add(BackLog.State.Review);
+
             cmbContent1.Add(BackLog.State.Done);
             comboStates.ItemsSource = cmbContent1;
 

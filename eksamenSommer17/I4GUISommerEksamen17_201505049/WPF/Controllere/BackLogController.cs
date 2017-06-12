@@ -23,7 +23,7 @@ namespace WPF.Controllere
 
         public ObservableCollection<BackLog> _toDo = new ObservableCollection<BackLog>();
         public ObservableCollection<BackLog> _doing = new ObservableCollection<BackLog>();
-        public ObservableCollection<BackLog> _review = new ObservableCollection<BackLog>();
+        public ObservableCollection<BackLog> _backlog = new ObservableCollection<BackLog>();
         public ObservableCollection<BackLog> _done = new ObservableCollection<BackLog>();
 
 
@@ -39,10 +39,10 @@ namespace WPF.Controllere
             set { _doing = value; }
         }
 
-        public ObservableCollection<BackLog> Review
+        public ObservableCollection<BackLog> Backlog
         {
-            get { return _review; }
-            set { _review = value; }
+            get { return _backlog; }
+            set { _backlog = value; }
         }
 
         public ObservableCollection<BackLog> Done
@@ -69,8 +69,8 @@ namespace WPF.Controllere
                     ToDo.Add(i);
                 else if (i.States == BackLog.State.IsDoing)
                     Doing.Add(i);
-                else if (i.States == BackLog.State.Review)
-                    Review.Add(i);
+                else if (i.States == BackLog.State.Backlog)
+                    Backlog.Add(i);
                 else
                     Done.Add(i);
             }
@@ -82,7 +82,7 @@ namespace WPF.Controllere
         {
             ToDo.Clear();
             Doing.Clear();
-            Review.Clear();
+            Backlog.Clear();
             Done.Clear();
             var result = readDbDataToDisplay();
 
@@ -92,8 +92,8 @@ namespace WPF.Controllere
                     ToDo.Add(i);
                 else if (i.States == BackLog.State.IsDoing)
                     Doing.Add(i);
-                else if (i.States == BackLog.State.Review)
-                    Review.Add(i);
+                else if (i.States == BackLog.State.Backlog)
+                    Backlog.Add(i);
                 else
                     Done.Add(i);
             }
@@ -172,10 +172,10 @@ namespace WPF.Controllere
             dlg.DataContext = newTask;
             if (dlg.ShowDialog() == true)
             {
-                newTask.States = BackLog.State.IsToDo;
+                newTask.States = BackLog.State.Backlog;
                 
                 NotifyPropertyChanged();
-                ToDo.Add(newTask);
+                Backlog.Add(newTask);
 
                 AddTask(newTask);
             }
@@ -188,7 +188,17 @@ namespace WPF.Controllere
             BackLog toEdit = new BackLog();
             switch (name)
             {
-                case "ToDoList":
+                case "Backlog":
+                    toEdit = Backlog[BackLogCurrentIndex];
+                    dlg.DataContext = toEdit;
+
+                    if (dlg.ShowDialog() == true)
+                    {
+                        PutTask(toEdit);
+                        RefreshMainWindow();
+                    }
+                    break;
+                case "IsToDo":
                     toEdit = ToDo[ToDoCurrentIndex];
                     dlg.DataContext = toEdit;
 
@@ -198,7 +208,7 @@ namespace WPF.Controllere
                         RefreshMainWindow();
                     }
                     break;
-                case "DoingList":
+                case "Doing":
                     toEdit = Doing[DoingCurrentIndex];
                     dlg.DataContext = toEdit;
 
@@ -208,17 +218,7 @@ namespace WPF.Controllere
                         RefreshMainWindow();
                     }
                     break;
-                case "ReviewList":
-                    toEdit = Review[ReviewCurrentIndex];
-                    dlg.DataContext = toEdit;
-
-                    if (dlg.ShowDialog() == true)
-                    {
-                        PutTask(toEdit);
-                        RefreshMainWindow();
-                    }
-                    break;
-                case "DoneList":
+                case "Done":
                     toEdit = Done[DoneCurrentIndex];
                     dlg.DataContext = toEdit;
 
@@ -239,7 +239,7 @@ namespace WPF.Controllere
 
         private int _toDoCurrentIndex = 0;
         private int _doingCurrentIndex = 0;
-        private int _reviewCurrentIndex = 0;
+        private int _backlogCurrentIndex = 0;
         private int _doneCurrentIndex = 0;
 
         public int ToDoCurrentIndex
@@ -267,14 +267,14 @@ namespace WPF.Controllere
             }
         }
 
-        public int ReviewCurrentIndex
+        public int BackLogCurrentIndex
         {
-            get { return _reviewCurrentIndex; }
+            get { return _backlogCurrentIndex; }
             set
             {
-                if (_reviewCurrentIndex != value)
+                if (_backlogCurrentIndex != value)
                 {
-                    _reviewCurrentIndex = value;
+                    _backlogCurrentIndex = value;
                     NotifyPropertyChanged();
                 }
             }

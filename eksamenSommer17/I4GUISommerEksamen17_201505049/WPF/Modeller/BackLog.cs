@@ -14,7 +14,7 @@ namespace WPF.Modeller
         public int Priority { get; set; }
         public double EstimatedTime { get; set; }
         public string Responsible { get; set; }
-        public enum State { IsToDo, IsDoing, Review, Done }
+        public enum State { Backlog, IsToDo, IsDoing, Done }
         public State States { get; set; }
     }
 

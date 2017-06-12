@@ -15,7 +15,7 @@
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
-            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
 
         <!--ListBox template-->
@@ -50,14 +50,14 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">To Do</Label>
-            <Label Grid.Column="1" Grid.Row="0">Doing</Label>
-            <Label Grid.Column="2" Grid.Row="0">Review</Label>
+            <Label Grid.Column="0" Grid.Row="0">Backlog</Label>
+            <Label Grid.Column="1" Grid.Row="0">To Do</Label>
+            <Label Grid.Column="2" Grid.Row="0">Doing</Label>
             <Label Grid.Column="3" Grid.Row="0">Done</Label>
-            <ListBox Name="ToDoList" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=ToDo}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ToDoCurrentIndex}" MouseDoubleClick="ToDoList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="DoingList" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Doing}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoingCurrentIndex}" MouseDoubleClick="DoingList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="ReviewList" Grid.Column="2" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Review}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ReviewCurrentIndex}" MouseDoubleClick="ReviewList_OnMouseDoubleClick"></ListBox>
-            <ListBox Name="DoneList" Grid.Column="3" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Done}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoneCurrentIndex}" MouseDoubleClick="DoneList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="Backlog" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Backlog}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=BackLogCurrentIndex}" MouseDoubleClick="ToDoList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="IsToDo" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=ToDo}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=ToDoCurrentIndex}" MouseDoubleClick="DoingList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="Doing" Grid.Column="2" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Doing}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoingCurrentIndex}" MouseDoubleClick="ReviewList_OnMouseDoubleClick"></ListBox>
+            <ListBox Name="Done" Grid.Column="3" Grid.Row="1" Margin="10,0,10,10" ItemsSource="{Binding Path=Done}" ItemTemplate="{StaticResource ListBoxTemplate}" SelectedIndex="{Binding Path=DoneCurrentIndex}" MouseDoubleClick="DoneList_OnMouseDoubleClick"></ListBox>
 
         </Grid>
     </DockPanel>
