@@ -16,6 +16,8 @@ namespace Web.Models
         public int Priority { get; set; }
         [Required]
         public double EstimatedTime { get; set; }
+        [Required]
+        public string Responsible { get; set; }
         public enum State { IsToDo, IsDoing, Review, Done }
         public State States { get; set; }
     }

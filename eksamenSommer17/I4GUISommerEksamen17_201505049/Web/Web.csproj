@@ -261,6 +261,10 @@
     <Compile Include="Migrations\201706120811572_EnumStateProp.Designer.cs">
       <DependentUpon>201706120811572_EnumStateProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120827187_Responsible.cs" />
+    <Compile Include="Migrations\201706120827187_Responsible.Designer.cs">
+      <DependentUpon>201706120827187_Responsible.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +317,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -360,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706120811572_EnumStateProp.resx">
       <DependentUpon>201706120811572_EnumStateProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120827187_Responsible.resx">
+      <DependentUpon>201706120827187_Responsible.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -49,10 +49,11 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,States")] BackLog backLog)
+        public ActionResult Create([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,Responsible,States")] BackLog backLog)
         {
             if (ModelState.IsValid)
             {
+                backLog.States = BackLog.State.IsToDo;
                 db.BackLogs.Add(backLog);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,15 +82,33 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,States")] BackLog backLog)
+        public ActionResult Edit([Bind(Include = "BackLogId,Description,Priority,EstimatedTime,Responsible,States")] BackLog backLog)
         {
             if (ModelState.IsValid)
             {
+                //backLog.States = BackLog.State.IsToDo;
                 db.Entry(backLog).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(backLog);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("BackLogWeb/SumbitNewState/{id}")]
+        public ActionResult SumbitNewState(BackLog.State newState, int? id)
+        {
+            BackLog backLog = new BackLog();
+            if (ModelState.IsValid)
+            {
+                //backLog.States = BackLog.State.IsToDo;
+                backLog = db.BackLogs.Find(id);
+                backLog.States = newState;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Index");
         }
 
         // GET: BackLogWeb/Delete/5

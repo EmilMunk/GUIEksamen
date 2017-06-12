@@ -8,9 +8,9 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" ", "Create",null, new {@Class = "glyphicon glyphicon-plus" })
 </p>
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
         @(BackLog.State.IsToDo)
@@ -24,7 +24,6 @@
         <th>
             @(BackLog.State.Done)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -32,33 +31,84 @@
         <td>
             @if (item.States == BackLog.State.IsToDo)
             {
-                @Html.DisplayFor(modelItem => item.Description)
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle 
+                            @(item.Priority==1?"priorityHigh":
+                 @item.Priority==2?"priorityMedium":
+                 @item.Priority==3?"priorityLow":
+                 @item.Priority==4?"priorityVeryLow":"")" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        @item.Description <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Details", "Details", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl" ><a> @Html.ActionLink("Edit", "Edit", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Delete", "Delete", new { id = item.BackLogId }, new { @Class = "btn btn-danger" }) </a></li>
+                    </ul>
+                </div>
             }
            
         </td>
         <td>
             @if (item.States == BackLog.State.IsDoing)
             {
-                @Html.DisplayFor(modelItem => item.Description)
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle
+                             @(item.Priority==1?"priorityHigh":
+                 @item.Priority==2?"priorityMedium":
+                 @item.Priority==3?"priorityLow":
+                 @item.Priority==4?"priorityVeryLow":"")" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       @item.Description <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Details", "Details", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Edit", "Edit", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Delete", "Delete", new { id = item.BackLogId }, new { @Class = "btn btn-danger" }) </a></li>
+
+                    </ul>
+                </div>             
             }
         </td>
         <td>
             @if (item.States == BackLog.State.Review)
             {
-                @Html.DisplayFor(modelItem => item.Description)
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle
+                             @(item.Priority==1?"priorityHigh":
+                 @item.Priority==2?"priorityMedium":
+                 @item.Priority==3?"priorityLow":
+                 @item.Priority==4?"priorityVeryLow":"")" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @item.Description <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Details", "Details", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Edit", "Edit", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Delete", "Delete", new { id = item.BackLogId }, new { @Class = "btn btn-danger" }) </a></li>
+                        
+                    </ul>
+                </div>
             }
         </td>
         <td>
             @if (item.States == BackLog.State.Done)
             {
-                @Html.DisplayFor(modelItem => item.Description)
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle
+                            @(item.Priority==1?"priorityHigh":
+                 @item.Priority==2?"priorityMedium":
+                 @item.Priority==3?"priorityLow":
+                 @item.Priority==4?"priorityVeryLow":"")" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @item.Description <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Details", "Details", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Edit", "Edit", new { id = item.BackLogId }, new { @Class = "btn btn-default" }) </a></li>
+                        <li class="PaddingOnUl"><a> @Html.ActionLink("Delete", "Delete", new { id = item.BackLogId }, new { @Class = "btn btn-danger" }) </a></li>
+                      
+                    </ul>
+                </div>
             }
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BackLogId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BackLogId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BackLogId })
-        </td>
+       
     </tr>
 }
 
