@@ -1,0 +1,62 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-inverse {
+    background-color: darkcyan !important; 
+}
+
+.navbar-inverse .navbar-collapse .navbar-nav > li > a {
+    color : lightgray
+}
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.NewItemButton {
+    background-color: green;
+}
+
+.DeleteButton {
+    background-color: lightcoral;
+}
+
+.PaddingOnUl {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.PartyButton{}
+
+.priorityHigh{
+    background-color: red
+
+}
+
+.priorityMedium{
+    background-color: orange
+
+}
+.priorityLow{
+    background-color: green
+
+}
+.priorityVeryLow{
+    background-color: lightgreen;
+
+}
+
